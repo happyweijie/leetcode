@@ -18,9 +18,11 @@ def graph_valid_tree(n: int, edges: list[list[int]]) -> bool:
     Let n = number of vertices, e = number of edges
 
     Time Complexity: O(n), 
-    Explanation: the for loop runs for every edge and only when the graph has 
-    exactly n - 1 edges. 
-    Removing the if condition, the for loop runs for every edge, so O(e).
+    Explanation: 
+    1. Time to initialise the UnionFind is O(n)
+    2. The for loop runs for every edge and only when the graph has 
+    exactly n - 1 edges, O(n). 
+    Removing the if condition, the for loop runs for every edge, so O(n + e).
 
     Space Complexity: O(n), space for union-find data structure
     """
