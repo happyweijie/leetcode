@@ -3,6 +3,13 @@ from typing import List
 
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        """
+        Lazy Dijkstra's Algorithm approach
+
+        Let n be the number of vertices and E be the number of edges in the graph.
+        Time complexity: O(E log n)
+        Space complexity: O(n + E), adjacency list and distance array
+        """
         # Convert edge list to adjacency list
         adj_list = [[] for _ in range(n)]
         for u, v, w in times:
