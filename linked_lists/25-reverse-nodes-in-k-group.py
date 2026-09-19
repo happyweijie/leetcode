@@ -19,7 +19,7 @@ class Solution:
         res_cur = res
 
         cur = head
-        while cur:
+        while cur is not None:
             grp_len = 1
             
             start, end = cur, cur
@@ -53,7 +53,7 @@ class Solution:
     def reverse_group(self, node: ListNode) -> None:
         res = ListNode()
 
-        while node:
+        while node is not None:
             # detach node from the list
             nxt = node.next
             node.next = None
