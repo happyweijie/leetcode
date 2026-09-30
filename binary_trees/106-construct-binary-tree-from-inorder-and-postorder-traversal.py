@@ -19,7 +19,7 @@ class Solution:
         self.in_idx = len(postorder) - 1
 
         # l and r tracks index in inorder
-        def dfs(limit: float | int) -> TreeNode | None:
+        def build_subtree(limit: float | int) -> TreeNode | None:
             if self.post_idx < 0:
                 return None
             elif inorder[self.in_idx] == limit:
@@ -29,12 +29,12 @@ class Solution:
             root = TreeNode(postorder[self.post_idx])
             self.post_idx -= 1
 
-            root.right = dfs(root.val)
-            root.left = dfs(limit)
+            root.right = build_subtree(root.val)
+            root.left = build_subtree(limit)
 
             return root
 
-        return dfs(float("inf"))
+        return build_subtree(float("inf"))
 
     def buildTree1(self, inorder: list[int], postorder: list[int]) -> TreeNode | None:
         """
@@ -47,19 +47,19 @@ class Solution:
         self.post_idx = len(postorder) - 1
 
         # l and r tracks index in inorder
-        def dfs(l: int, r: int) -> TreeNode | None:
+        def build_subtree(l: int, r: int) -> TreeNode | None:
             if l > r:
                 return None
 
             root = TreeNode(postorder[self.post_idx])
             self.post_idx -= 1
 
-            root.right = dfs(inorder_indices[root.val] + 1, r)
-            root.left = dfs(l, inorder_indices[root.val] - 1)
+            root.right = build_subtree(inorder_indices[root.val] + 1, r)
+            root.left = build_subtree(l, inorder_indices[root.val] - 1)
 
             return root
 
-        return dfs(0, len(inorder) - 1)
+        return build_subtree(0, len(inorder) - 1)
 
     def buildTree2(self, inorder: list[int], postorder: list[int]) -> TreeNode | None:
         """
@@ -75,11 +75,11 @@ class Solution:
             mid = inorder.index(root.val) 
             right_subtree_size = n  - 1 - mid
 
-            root.right = self.buildTree(
+            root.right = self.buildTree2(
                 inorder[mid + 1:],
                 postorder[n - 1 - right_subtree_size:n - 1],
             )
-            root.left = self.buildTree(
+            root.left = self.buildTree2(
                 inorder[:mid],
                 postorder[:n - 1 - right_subtree_size]
             )

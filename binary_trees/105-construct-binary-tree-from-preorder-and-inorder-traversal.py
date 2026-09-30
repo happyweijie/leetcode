@@ -18,7 +18,7 @@ class Solution:
         """
         self.pre_idx, self.in_idx = 0, 0
 
-        def dfs(limit: int | float) -> TreeNode | None:
+        def build_subtree(limit: int | float) -> TreeNode | None:
             # all elements have been used
             if self.pre_idx == len(preorder):
                 return None
@@ -30,14 +30,14 @@ class Solution:
             root = TreeNode(preorder[self.pre_idx])
             self.pre_idx += 1
 
-            root.left = dfs(root.val)
-            root.right = dfs(limit)
+            root.left = build_subtree(root.val)
+            root.right = build_subtree(limit)
 
             return root
 
         # run with an arbitary limit at first
-        return dfs(float("inf"))
-    
+        return build_subtree(float("inf"))
+
 class Solution1:
     def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
         """
@@ -55,7 +55,7 @@ class Solution1:
         self.pre_idx = 0
 
         # l and r track indices in inorder
-        def dfs(l: int, r: int) -> TreeNode | None:
+        def build_subtree(l: int, r: int) -> TreeNode | None:
             if l > r:
                 return None
 
@@ -63,12 +63,12 @@ class Solution1:
             mid = inorder_indices[preorder[self.pre_idx]]
             self.pre_idx += 1
 
-            root.left = dfs(l, mid - 1)
-            root.right = dfs(mid + 1, r)
+            root.left = build_subtree(l, mid - 1)
+            root.right = build_subtree(mid + 1, r)
 
             return root
 
-        return dfs(0, len(inorder) - 1)
+        return build_subtree(0, len(inorder) - 1)
 
 
 class Solution2:
