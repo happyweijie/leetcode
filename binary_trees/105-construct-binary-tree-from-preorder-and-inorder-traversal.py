@@ -22,7 +22,7 @@ class Solution:
             # all elements have been used
             if self.pre_idx == len(preorder):
                 return None
-            # left subtree is fully built
+            # the current subtree has reached its inorder boundary
             elif inorder[self.in_idx] == limit: 
                 self.in_idx += 1
                 return None
