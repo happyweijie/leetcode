@@ -16,10 +16,10 @@ class Solution:
         O(n) space for recursive stack
         """
         self.post_idx = len(postorder) - 1
-        self.in_idx = len(postorder) - 1
+        self.in_idx = len(inorder) - 1
 
-        # l and r tracks index in inorder
         def build_subtree(limit: float | int) -> TreeNode | None:
+            # Scan inorder from right to left; limit marks the current subtree's boundary.
             if self.post_idx < 0:
                 return None
             elif inorder[self.in_idx] == limit:
@@ -29,6 +29,7 @@ class Solution:
             root = TreeNode(postorder[self.post_idx])
             self.post_idx -= 1
 
+            # Postorder is reversed: root, right subtree, then left subtree.
             root.right = build_subtree(root.val)
             root.left = build_subtree(limit)
 
