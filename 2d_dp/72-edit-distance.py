@@ -41,7 +41,7 @@ class Solution2:
         Levenshtein's Distance Dynamic Programming
 
         Time: O(mn)
-        Space: O(m), just store 2 rows instead of whole matrix
+        Space: O(mn), store whole matrix
         """
         n, m = len(word1), len(word2)
 
